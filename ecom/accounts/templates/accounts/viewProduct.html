@@ -1,0 +1,24 @@
+{% extends 'accounts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block maincontent %}
+
+<a href="{% url 'accounts:addProduct' %}" class="btn btn-success"> Add Product </a>
+<br>
+<br>
+{% for data in product_data %}
+Product Name : {{ data.product_name }}
+Product Price : {{ data.price }}
+Product Desc : {{ data.product_description }}
+<img src="/media/{{ data.product_image }}" alt="image" height="100px" width="100px">
+Created By : {{ data.product_added_by }}
+Created At : {{ data.created_at }}
+
+<a href="{% url 'accounts:updateProduct' data.id %}" class="btn btn-warning">Update</a>
+<form action="{% url 'accounts:deleteProduct' data.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger" onclick="return confirm('Do You want to delete ?')">Delete</button>
+</form>
+<hr><hr>
+{% endfor %}
+{% endblock %}

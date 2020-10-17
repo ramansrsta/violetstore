@@ -1,0 +1,18 @@
+{% extends 'accounts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block maincontent %}
+<br>
+<br>
+{% for data in order_data %}
+Amount Payable : {{ data.payable_amount }}
+client_id : {{ data.client_id }}
+First Name : {{ data.first_name }}
+Last Name : {{ data.last_name }}
+checked_by : {{ data.checked_by }}
+Email  : {{ data.email }}
+
+<a href="{% url 'accounts:updateOrder' data.id %}" class="btn btn-warning"> Check For Validity </a>
+<hr><hr>
+{% endfor %}
+{% endblock %}

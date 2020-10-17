@@ -1,0 +1,20 @@
+{% extends 'accounts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block maincontent %}
+
+<a href="{% url 'accounts:register' %}" class="btn btn-success"> Add Admin </a>
+<br>
+<br>
+{% for data in admin_data %}
+First Name : {{ data.first_name }}
+Last Name : {{ data.last_name }}
+Id : {{ data.id }}
+<a href="{% url 'accounts:update' data.id %}" class="btn btn-warning"> Update Admin</a>
+<form action="{% url 'accounts:delete' data.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger" onclick="return confirm('Do You want to delete ?')">Delete</button>
+</form>
+<hr><hr>
+{% endfor %}
+{% endblock %}
